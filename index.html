@@ -206,5 +206,188 @@
     }));
     document.getElementById('year').textContent=new Date().getFullYear();
   </script>
+  
+<!-- NEXORA ADDITIONAL ELECTRICAL & COUNTRY SECTIONS -->
+<style>
+  .nx-electrical-section{padding:90px 0;background:#f6f8fb}
+  .nx-electrical-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .nx-electrical-card{background:#fff;border:1px solid #e5eaf0;border-radius:16px;overflow:hidden;transition:.25s}
+  .nx-electrical-card:hover{transform:translateY(-5px);box-shadow:0 18px 55px rgba(16,31,54,.1)}
+  .nx-electrical-card img{width:100%;height:220px;object-fit:cover;display:block}
+  .nx-electrical-content{padding:22px}
+  .nx-electrical-content h3{font-family:Manrope,sans-serif;color:#101f36;margin:5px 0 10px;font-size:1.15rem}
+  .nx-electrical-content p{color:#667386;font-size:.91rem}
+  .nx-electrical-tag{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#245c9b}
+  .nx-country-extra{margin-top:14px}
+  @media(max-width:900px){.nx-electrical-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.nx-electrical-grid{grid-template-columns:1fr}.nx-electrical-card img{height:220px}}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  /* 1. Add Electrical Work navigation link */
+  const nav = document.getElementById("navLinks");
+
+  if(nav && !document.getElementById("nxElectricalNav")){
+    const link = document.createElement("a");
+    link.href = "#nx-electrical";
+    link.id = "nxElectricalNav";
+    link.textContent = "Electrical Work";
+
+    const equipmentLink = nav.querySelector('a[href="#equipment"]');
+    if(equipmentLink){
+      nav.insertBefore(link, equipmentLink);
+    }else{
+      nav.appendChild(link);
+    }
+  }
+
+  /* 2. Add Electrical Work Gallery */
+  if(!document.getElementById("nx-electrical")){
+    const electrical = document.createElement("section");
+    electrical.className = "nx-electrical-section";
+    electrical.id = "nx-electrical";
+
+    electrical.innerHTML = `
+      <div class="container">
+
+        <div class="section-head">
+          <span class="eyebrow">Electrical Infrastructure</span>
+          <h2>Electrical Work & Project Capabilities.</h2>
+          <p>Connecting project requirements with suitable electrical contractors, subcontractors and execution partners across different voltage levels.</p>
+        </div>
+
+        <div class="nx-electrical-grid">
+
+          <article class="nx-electrical-card">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=85" alt="LT electrical equipment and components">
+            <div class="nx-electrical-content">
+              <span class="nx-electrical-tag">Low Voltage</span>
+              <h3>LT Electrical Work</h3>
+              <p>LT panels, distribution systems, cabling, wiring and electrical installation requirements.</p>
+            </div>
+          </article>
+
+          <article class="nx-electrical-card">
+            <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=900&q=85" alt="Electrical power infrastructure">
+            <div class="nx-electrical-content">
+              <span class="nx-electrical-tag">High Voltage</span>
+              <h3>HT Electrical Work</h3>
+              <p>HT installations, electrical distribution, cable work and associated infrastructure scopes.</p>
+            </div>
+          </article>
+
+          <article class="nx-electrical-card">
+            <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=900&q=85" alt="Power distribution infrastructure">
+            <div class="nx-electrical-content">
+              <span class="nx-electrical-tag">11 kV Distribution</span>
+              <h3>11 kV Line Work</h3>
+              <p>11 kV distribution lines, pole erection, conductor stringing and related project scopes.</p>
+            </div>
+          </article>
+
+          <article class="nx-electrical-card">
+            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=85" alt="Power line infrastructure">
+            <div class="nx-electrical-content">
+              <span class="nx-electrical-tag">33 kV Distribution</span>
+              <h3>33 kV Line Work</h3>
+              <p>33 kV line construction, installation, cable routes and associated electrical works.</p>
+            </div>
+          </article>
+
+          <article class="nx-electrical-card">
+            <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=900&q=85" alt="Industrial electrical facility">
+            <div class="nx-electrical-content">
+              <span class="nx-electrical-tag">Power Equipment</span>
+              <h3>Transformer Installation</h3>
+              <p>Transformer installation, shifting, testing and commissioning partner connections.</p>
+            </div>
+          </article>
+
+          <article class="nx-electrical-card">
+            <img src="https://images.unsplash.com/photo-1567789884554-0b844b597180?auto=format&fit=crop&w=900&q=85" alt="Industrial substation facility">
+            <div class="nx-electrical-content">
+              <span class="nx-electrical-tag">Grid Infrastructure</span>
+              <h3>Substation Work</h3>
+              <p>Substation erection, switchyard, electrical equipment installation and related scopes.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    `;
+
+    const splitBanner = document.querySelector(".split-banner");
+    if(splitBanner){
+      splitBanner.parentNode.insertBefore(electrical, splitBanner);
+    }
+  }
+
+  /* 3. Add additional countries without removing existing markets */
+  const marketGrid = document.querySelector("#markets .market-grid");
+
+  if(marketGrid){
+    const countries = [
+      "Qatar",
+      "Oman",
+      "Kuwait",
+      "Bahrain",
+      "Nepal",
+      "Bangladesh",
+      "Australia",
+      "New Zealand",
+      "United Kingdom"
+    ];
+
+    countries.forEach(function(country){
+      const alreadyExists = Array.from(
+        marketGrid.querySelectorAll(".market strong")
+      ).some(function(item){
+        return item.textContent.trim().toLowerCase() === country.toLowerCase();
+      });
+
+      if(!alreadyExists){
+        const card = document.createElement("div");
+        card.className = "market nx-country-extra";
+        card.innerHTML =
+          "<strong>" + country + "</strong><small>Target Market</small>";
+        marketGrid.appendChild(card);
+      }
+    });
+  }
+
+  /* 4. Add voltage-specific options to existing project sector form */
+  const sectorSelect = document.getElementById("sector");
+
+  if(sectorSelect){
+    const options = [
+      "LT Electrical Work",
+      "HT Electrical Work",
+      "11 kV Line Work",
+      "33 kV Line Work",
+      "132 kV Transmission Work",
+      "220 kV Transmission Work",
+      "Transformer Installation & Commissioning",
+      "Substation Erection"
+    ];
+
+    options.forEach(function(optionText){
+      const exists = Array.from(sectorSelect.options).some(function(option){
+        return option.text.trim() === optionText;
+      });
+
+      if(!exists){
+        const option = document.createElement("option");
+        option.textContent = optionText;
+        option.value = optionText;
+        sectorSelect.appendChild(option);
+      }
+    });
+  }
+
+});
+</script>
+<!-- END NEXORA ADDITIONS -->
 </body>
 </html>
